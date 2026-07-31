@@ -1,843 +1,684 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sprinkle Life | Premium Mineral Water</title>
-    <!-- Modern Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Dark Leaf Green Theme */
-            --primary-green: #2A5A3B; 
-            --light-green: #4A7C59;
-            --accent-green: #88D49E;
-            --text-dark: #1A2F22;
-            --text-light: #F4F7F5;
-            --bg-light: #FAFCFA;
-            --white-translucent: rgba(255, 255, 255, 0.8);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        p {
-            font-weight: 300;
-            font-size: 1.1rem;
-        }
-
-        /* Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(250, 252, 250, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-green);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .logo-icon {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, var(--accent-green), var(--primary-green));
-            border-radius: 50% 50% 0 50%;
-            transform: rotate(-45deg);
-            box-shadow: 0 4px 10px rgba(42, 90, 59, 0.3);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary-green);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-green);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .btn {
-            padding: 0.8rem 1.8rem;
-            background: linear-gradient(135deg, var(--light-green), var(--primary-green));
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(42, 90, 59, 0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(42, 90, 59, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--primary-green);
-            border: 2px solid var(--primary-green);
-            box-shadow: none;
-        }
-        
-        .btn-outline:hover {
-            background: var(--primary-green);
-            color: white;
-            box-shadow: 0 8px 25px rgba(42, 90, 59, 0.2);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            padding-top: 80px;
-        }
-
-        .hero-content {
-            flex: 1;
-            padding-right: 3rem;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 5vw, 5rem);
-            color: var(--primary-green);
-            margin-bottom: 1.5rem;
-            animation: fadeUp 1s ease forwards;
-            opacity: 0;
-        }
-
-        .hero h1 span {
-            color: var(--accent-green);
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2.5rem;
-            color: #555;
-            max-width: 600px;
-            animation: fadeUp 1s ease 0.3s forwards;
-            opacity: 0;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            animation: fadeUp 1s ease 0.6s forwards;
-            opacity: 0;
-        }
-
-        .hero-visual {
-            flex: 1;
-            position: relative;
-            height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1;
-            animation: fadeIn 1.5s ease forwards;
-            opacity: 0;
-        }
-
-        /* Abstract CSS Art for Water Bottle / Drop */
-        .abstract-water {
-            width: 300px;
-            height: 500px;
-            background: linear-gradient(135deg, rgba(136, 212, 158, 0.3), rgba(42, 90, 59, 0.05));
-            border-radius: 120px;
-            position: relative;
-            backdrop-filter: blur(8px);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 30px 60px rgba(42, 90, 59, 0.15), inset 0 0 20px rgba(255,255,255,0.5);
-            overflow: hidden;
-            display: flex;
-            align-items: flex-end;
-        }
-        
-        .water-fill {
-            width: 100%;
-            height: 65%;
-            background: linear-gradient(180deg, var(--accent-green) 0%, var(--primary-green) 100%);
-            border-radius: 0 0 120px 120px;
-            position: relative;
-            animation: waterRise 2s ease-out forwards;
-        }
-        
-        .water-fill::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 0;
-            width: 100%;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            animation: surfaceWave 4s ease-in-out infinite alternate;
-        }
-
-        .bg-blob {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: var(--light-green);
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.15;
-            top: 50%;
-            right: -100px;
-            transform: translateY(-50%);
-            z-index: -1;
-        }
-
-        /* General Section Styling */
-        section {
-            padding: 8rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: 2.8rem;
-            color: var(--primary-green);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-green);
-            border-radius: 2px;
-        }
-
-        .section-subtitle {
-            margin-top: 2rem;
-            color: #666;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--light-green);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            color: #444;
-        }
-        
-        .about-visual {
-            position: relative;
-            height: 500px;
-            border-radius: 30px;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="%2388D49E" d="M42.7,-73.4C55.9,-66.5,67.5,-55.4,75.9,-42.1C84.3,-28.8,89.5,-14.4,87.6,-1.1C85.7,12.2,76.6,24.4,67.4,35.6C58.2,46.8,48.8,57,36.9,64.2C25,71.4,12.5,75.6,-0.6,76.6C-13.7,77.5,-27.4,75.3,-39.8,69C-52.2,62.7,-63.3,52.3,-71.4,39.7C-79.5,27.1,-84.6,13.5,-84.4,0.1C-84.1,-13.3,-78.5,-26.6,-70.7,-38.4C-62.9,-50.2,-52.9,-60.5,-40.8,-68.2C-28.7,-75.9,-14.3,-81,0.7,-82.2C15.7,-83.4,31.4,-80.7,42.7,-73.4Z" transform="translate(100 100)" /></svg>') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .about-visual::after {
-            content: '';
-            position: absolute;
-            width: 80%;
-            height: 80%;
-            background: linear-gradient(45deg, var(--primary-green), var(--light-green));
-            border-radius: 30px;
-            z-index: -1;
-            transform: rotate(5deg);
-            opacity: 0.2;
-        }
-
-        .about-badge {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 250px;
-        }
-
-        .about-badge h4 {
-            color: var(--primary-green);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Features Section */
-        .features-wrapper {
-            background-color: var(--primary-green);
-            padding: 8rem 0;
-            position: relative;
-        }
-        
-        .features-wrapper .section-title {
-            color: var(--text-light);
-        }
-        
-        .features-wrapper .section-subtitle {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.08);
-            padding: 3rem 2rem;
-            border-radius: 20px;
-            transition: transform 0.4s ease, background 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-15px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background-color: var(--accent-green);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: var(--primary-green);
-            font-size: 1.8rem;
-            font-weight: bold;
-            transform: rotate(-10deg);
-        }
-
-        .feature-card h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .feature-card p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-
-        /* Info Banner */
-        .info-banner {
-            background: var(--light-green);
-            padding: 4rem 5%;
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            color: white;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat h2 {
-            font-size: 3rem;
-            color: var(--accent-green);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%23f4f7f5" fill-opacity="1" d="M0,192L48,181.3C96,171,192,149,288,149.3C384,149,480,171,576,192C672,213,768,235,864,213.3C960,192,1056,128,1152,106.7C1248,85,1344,107,1392,117.3L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') no-repeat top;
-            background-size: cover;
-            padding-top: 15rem;
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 4rem;
-            background: white;
-            padding: 4rem;
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
-        }
-
-        .contact-details h3 {
-            font-size: 2rem;
-            color: var(--primary-green);
-            margin-bottom: 1.5rem;
-        }
-        
-        .contact-details p {
-            margin-bottom: 2rem;
-            color: #555;
-        }
-
-        .info-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-        
-        .info-row .icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(136, 212, 158, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-green);
-            font-weight: bold;
-        }
-
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .contact-form input, .contact-form textarea {
-            padding: 1rem 1.5rem;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 1rem;
-            background: var(--bg-light);
-            transition: border-color 0.3s;
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            outline: none;
-            border-color: var(--primary-green);
-        }
-
-        .contact-form textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--text-dark);
-            color: var(--text-light);
-            padding: 4rem 5% 2rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 4rem;
-            max-width: 1400px;
-            margin: 0 auto 3rem;
-        }
-
-        .footer-brand .logo {
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .footer-brand p {
-            opacity: 0.7;
-            max-width: 400px;
-        }
-
-        .footer-links h4 {
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-
-        .footer-links ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .footer-links a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-green);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            opacity: 0.6;
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes waterRise {
-            from { height: 0%; }
-            to { height: 65%; }
-        }
-
-        @keyframes surfaceWave {
-            0% { transform: translateX(-5%) scaleX(1.1); }
-            100% { transform: translateX(5%) scaleX(1.1); }
-        }
-
-        /* Scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero, .about-grid, .contact-container, .footer-content {
-                grid-template-columns: 1fr;
-                flex-direction: column;
-            }
-            .hero { padding-top: 120px; text-align: center; }
-            .hero-content { padding-right: 0; margin-bottom: 3rem; }
-            .hero-buttons { justify-content: center; }
-            .hero h1 { font-size: 3.5rem; }
-            .nav-links { display: none; }
-            .info-banner { flex-direction: column; gap: 2rem; }
-            .contact { padding-top: 8rem; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprinkle Life | Pure Natural Mineral Water</title>
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* --- CSS VARIABLES & WATER THEME --- */
+    :root {
+      --primary-dark-leaf: #1e4d2b;
+      --primary-leaf-hover: #15371f;
+      --accent-fresh-green: #2d7a42;
+      --accent-water-light: #e3f2fd;
+      --water-blue-shade: #1a5b6e;
+      --water-bg-light: #f0f8f8;
+      --text-dark: #1f2937;
+      --text-light: #52606d;
+      --bg-white: #ffffff;
+      --font-main: 'Plus Jakarta Sans', sans-serif;
+      --transition: all 0.3s ease;
+    }
+
+    /* --- RESET & BASE STYLES --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--text-dark);
+      /* Global subtle water-tinted background with soft wave pattern */
+      background-color: var(--water-bg-light);
+      background-image:
+        radial-gradient(circle at 50% 0%, rgba(45, 122, 66, 0.08) 0%, transparent 60%),
+        radial-gradient(circle at 100% 50%, rgba(26, 91, 110, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, rgba(30, 77, 43, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-dark-leaf);
+      color: var(--bg-white);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-leaf-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(30, 77, 43, 0.25);
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: var(--primary-dark-leaf);
+      border: 2px solid var(--primary-dark-leaf);
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-dark-leaf);
+      color: var(--bg-white);
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.25rem;
+      color: var(--primary-dark-leaf);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+    }
+
+    /* --- NAVIGATION --- */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-dark-leaf);
+    }
+
+    .logo i {
+      font-size: 1.75rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-links a {
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark-leaf);
+    }
+
+    /* --- HERO SECTION WITH ANIMATED WATER GRADIENT --- */
+    .hero {
+      padding: 160px 0 100px 0;
+      /* Animated water liquid gradient */
+      background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 40%, #e0f7fa 70%, #f0fdf4 100%);
+      background-size: 200% 200%;
+      animation: waterFlow 12s ease infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes waterFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-text h1 {
+      font-size: 3.25rem;
+      line-height: 1.2;
+      color: var(--primary-dark-leaf);
+      margin-bottom: 20px;
+    }
+
+    .hero-text p {
+      font-size: 1.125rem;
+      color: var(--text-light);
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+    }
+
+    .hero-image-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-card {
+      width: 100%;
+      max-width: 420px;
+      height: 480px;
+      /* Deep leaf-to-water blue gradient */
+      background: linear-gradient(160deg, var(--primary-dark-leaf) 0%, #15371f 50%, var(--water-blue-shade) 100%);
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      box-shadow: 0 20px 40px rgba(26, 91, 110, 0.25);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero-card i {
+      font-size: 8rem;
+      margin-bottom: 20px;
+      opacity: 0.95;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+    }
+
+    /* --- ABOUT SECTION --- */
+    .about {
+      padding: 100px 0;
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-content h2 {
+      font-size: 2.25rem;
+      color: var(--primary-dark-leaf);
+      margin-bottom: 20px;
+    }
+
+    .about-content p {
+      color: var(--text-light);
+      margin-bottom: 20px;
+    }
+
+    .features-list {
+      margin-top: 24px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .feature-item i {
+      color: var(--primary-dark-leaf);
+      background-color: var(--accent-water-light);
+      padding: 10px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+    }
+
+    /* --- PRODUCTS SECTION --- */
+    .products {
+      padding: 100px 0;
+      /* Soft watery background shade */
+      background: linear-gradient(180deg, rgba(240,248,248,0.5) 0%, rgba(224,242,254,0.4) 100%);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(26, 91, 110, 0.06);
+      transition: var(--transition);
+      border: 1px solid rgba(224, 242, 254, 0.8);
+      backdrop-filter: blur(6px);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 36px rgba(30, 77, 43, 0.12);
+      border-color: var(--primary-dark-leaf);
+    }
+
+    .product-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #e0f2fe, #dcfce7);
+      color: var(--primary-dark-leaf);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      font-size: 2rem;
+      box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    }
+
+    .product-card h3 {
+      font-size: 1.25rem;
+      color: var(--primary-dark-leaf);
+      margin-bottom: 12px;
+    }
+
+    .product-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* --- SUSTAINABILITY SECTION (DEEP WATER LEAF GRADIENT) --- */
+    .sustainability {
+      padding: 100px 0;
+      /* Leaf green blending into deep aquatic shade */
+      background: linear-gradient(135deg, var(--primary-dark-leaf) 0%, #15371f 50%, #113843 100%);
+      color: var(--bg-white);
+      text-align: center;
+      position: relative;
+    }
+
+    .sustainability .section-title {
+      color: var(--bg-white);
+    }
+
+    .sustainability .section-subtitle {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .sustainability-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .stat-card {
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-card h3 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .stat-card p {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* --- CONTACT SECTION --- */
+    .contact {
+      padding: 100px 0;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .contact-info h3 {
+      font-size: 1.5rem;
+      color: var(--primary-dark-leaf);
+      margin-bottom: 20px;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .contact-detail i {
+      font-size: 1.25rem;
+      color: var(--primary-dark-leaf);
+      background-color: var(--accent-water-light);
+      padding: 12px;
+      border-radius: 8px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-family: inherit;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.8);
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary-dark-leaf);
+      box-shadow: 0 0 0 3px rgba(30, 77, 43, 0.15);
+      background-color: #ffffff;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      background-color: #0b1a10;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 60px 0 30px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .footer-logo {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      font-size: 0.875rem;
+    }
+
+    /* --- RESPONSIVE DESIGN --- */
+    @media (max-width: 900px) {
+      .hero-wrapper,
+      .about-grid,
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <header>
-        <nav>
-            <a href="#" class="logo">
-                <div class="logo-icon"></div>
-                Sprinkle Life
-            </a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#water">Our Water</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="#contact" class="btn">Order Delivery</a>
-        </nav>
-    </header>
-
-    <div class="bg-blob"></div>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Pure Hydration, <br><span>Naturally Sourced.</span></h1>
-            <p>Experience the crisp, refreshing taste of nature with Sprinkle Life. Premium mineral water enriched with essential nutrients, delivered straight to your door.</p>
-            <div class="hero-buttons">
-                <a href="#about" class="btn">Discover the Source</a>
-                <a href="#water" class="btn btn-outline">View Benefits</a>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <div class="abstract-water">
-                <div class="water-fill"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="reveal">
-        <div class="section-header">
-            <h2 class="section-title">Born from Nature's Lap</h2>
-            <p class="section-subtitle">We believe that water is not just a thirst quencher, but the very essence of well-being and vitality.</p>
-        </div>
-        <div class="about-grid">
-            <div class="about-visual">
-                <div class="about-badge">
-                    <h4>100%</h4>
-                    <p>Natural Spring Water</p>
-                </div>
-            </div>
-            <div class="about-text">
-                <h3>The Journey of Purity</h3>
-                <p>Sprinkle Life began with a simple vision: to bring the purest, most revitalizing water straight from pristine, untouched natural springs directly to your hands.</p>
-                <p>Before it ever reaches the surface, our water is naturally filtered for decades through deep layers of ancient mineral rocks. This slow, natural process enriches the water with essential electrolytes and gives it a uniquely crisp, smooth taste that cannot be replicated.</p>
-                <br>
-                <p><strong>Every drop is a testament to nature's perfection.</strong></p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Info Banner -->
-    <div class="info-banner reveal">
-        <div class="stat">
-            <h2>7.4</h2>
-            <p>Perfect pH Balance</p>
-        </div>
-        <div class="stat">
-            <h2>0</h2>
-            <p>Artificial Additives</p>
-        </div>
-        <div class="stat">
-            <h2>100%</h2>
-            <p>Recyclable Packaging</p>
-        </div>
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <i class="fa-solid fa-leaf"></i>
+        <span>Sprinkle Life</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#products">Our Products</a></li>
+        <li><a href="#sustainability">Eco Initiative</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn btn-primary">Order Now</a>
     </div>
+  </nav>
 
-    <!-- Features Section -->
-    <div class="features-wrapper" id="water">
-        <section style="padding: 0;">
-            <div class="section-header reveal">
-                <h2 class="section-title">Why Choose Sprinkle Life?</h2>
-                <p class="section-subtitle">More than just water. It's a daily ritual for a healthier, more vibrant you.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card reveal" style="transition-delay: 0.1s;">
-                    <div class="feature-icon">💧</div>
-                    <h3>Alkaline Harmony</h3>
-                    <p>Naturally alkaline with an optimal pH of 7.4. It beautifully harmonizes with your body's natural state, helping to neutralize acidity and restore balance.</p>
-                </div>
-                <div class="feature-card reveal" style="transition-delay: 0.2s;">
-                    <div class="feature-icon">✨</div>
-                    <h3>Rich in Minerals</h3>
-                    <p>Infused by nature with essential minerals including calcium, magnesium, and potassium. These electrolytes support muscle function and ultimate hydration.</p>
-                </div>
-                <div class="feature-card reveal" style="transition-delay: 0.3s;">
-                    <div class="feature-icon">🌱</div>
-                    <h3>Eco-Conscious</h3>
-                    <p>We cherish the source that provides for us. Our bottles are made from 100% recycled, plant-based materials, ensuring our footprint is as light as our water.</p>
-                </div>
-            </div>
-        </section>
+  <!-- HERO SECTION WITH WATER GRADIENT -->
+  <section class="hero" id="home">
+    <div class="container hero-wrapper">
+      <div class="hero-text">
+        <h1>Nurturing Life With Every Pure Drop.</h1>
+        <p>Sourced from pristine natural aquifers and filtered through eco-conscious technology. Sprinkle Life delivers natural minerals essential for your active health.</p>
+        <div class="hero-buttons">
+          <a href="#products" class="btn btn-primary">Explore Products</a>
+          <a href="#about" class="btn btn-secondary">Our Story</a>
+        </div>
+      </div>
+      <div class="hero-image-container">
+        <div class="hero-card">
+          <i class="fa-solid fa-bottle-water"></i>
+          <h3>100% Pure Natural</h3>
+          <p>Rich in Essential Minerals</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="section-header reveal">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="section-subtitle">Interested in home delivery, becoming a wholesale partner, or just want to say hello?</p>
-        </div>
-        <div class="contact-container reveal">
-            <div class="contact-details">
-                <h3>Get in Touch</h3>
-                <p>Our dedicated team is always ready to assist you with any inquiries regarding our products, deliveries, or partnerships.</p>
-                
-                <div class="info-row">
-                    <div class="icon">✉</div>
-                    <div>
-                        <strong>Email Us</strong>
-                        <p style="margin:0;">hello@sprinklelife.com</p>
-                    </div>
-                </div>
-                <div class="info-row">
-                    <div class="icon">☏</div>
-                    <div>
-                        <strong>Call Us</strong>
-                        <p style="margin:0;">+1 (800) SPRINKLE</p>
-                    </div>
-                </div>
-                <div class="info-row">
-                    <div class="icon">📍</div>
-                    <div>
-                        <strong>Headquarters</strong>
-                        <p style="margin:0;">123 Spring Valley Rd, Nature City</p>
-                    </div>
-                </div>
+  <!-- ABOUT SECTION -->
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="about-content">
+        <h2>Refreshed by Nature, Bottled with Care</h2>
+        <p>At Sprinkle Life, we believe pure hydration is the foundation of a vibrant life. Our mineral water is sourced deep beneath protected forest soil, absorbing vital natural electrolytes and minerals along its journey.</p>
+       
+        <div class="features-list">
+          <div class="feature-item">
+            <i class="fa-solid fa-filter"></i>
+            <div>
+              <h4>Advanced Multi-Stage Filtration</h4>
+              <p>Purified to perfection while retaining key natural minerals like Calcium and Magnesium.</p>
             </div>
-            
-            <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for reaching out! We will get back to you soon.');">
-                <div class="input-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" placeholder="John Doe" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="john@example.com" required>
-                </div>
-                <div class="input-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" placeholder="How can we help you today?" required></textarea>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-brand">
-                <a href="#" class="logo" style="justify-content: flex-start;">
-                    <div class="logo-icon" style="background: white;"></div>
-                    Sprinkle Life
-                </a>
-                <p>Bringing the purest essence of nature straight to your daily life. Stay hydrated, stay vibrant.</p>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-seedling"></i>
+            <div>
+              <h4>Sustainable Sourcing</h4>
+              <p>We extract responsibly to ensure our natural springs remain protected for generations.</p>
             </div>
-            <div class="footer-links">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#water">Our Water</a></li>
-                    <li><a href="#">Sustainability</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div class="footer-links">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#">Delivery Info</a></li>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Sprinkle Life Mineral Water. All rights reserved.</p>
+      </div>
+      <div class="about-stats">
+        <div style="background: linear-gradient(135deg, #e0f2fe 0%, #dcfce7 100%); padding: 40px; border-radius: 20px; text-align: center; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 10px 25px rgba(26,91,110,0.08);">
+          <i class="fa-solid fa-droplet" style="font-size: 3rem; color: var(--primary-dark-leaf); margin-bottom: 15px;"></i>
+          <h3 style="color: var(--primary-dark-leaf); font-size: 1.75rem;">Balanced pH 7.8</h3>
+          <p>Naturally alkaline water designed to balance your body's vital systems perfectly.</p>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <!-- Scripts -->
-    <script>
-        // Scroll Reveal Animation Logic
-        document.addEventListener('DOMContentLoaded', () => {
-            const reveals = document.querySelectorAll('.reveal');
+  <!-- PRODUCTS SECTION -->
+  <section class="products" id="products">
+    <div class="container">
+      <h2 class="section-title">Our Pure Collections</h2>
+      <p class="section-subtitle">Tailored for every occasion, from daily wellness to your active workouts.</p>
+     
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-icon">
+            <i class="fa-solid fa-bottle-droplet"></i>
+          </div>
+          <h3>500ml Daily Hydration</h3>
+          <p>Compact, lightweight, and perfect for carrying in your everyday bag or on short travels.</p>
+        </div>
 
-            const revealOnScroll = () => {
-                const windowHeight = window.innerHeight;
-                const elementVisible = 100;
+        <div class="product-card">
+          <div class="product-icon">
+            <i class="fa-solid fa-whiskey-glass"></i>
+          </div>
+          <h3>1 Liter Active Life</h3>
+          <p>Designed for workouts, fitness enthusiasts, and long workdays requiring sustained hydration.</p>
+        </div>
 
-                reveals.forEach(reveal => {
-                    const elementTop = reveal.getBoundingClientRect().top;
-                    
-                    if (elementTop < windowHeight - elementVisible) {
-                        reveal.classList.add('active');
-                    }
-                });
-            };
+        <div class="product-card">
+          <div class="product-icon">
+            <i class="fa-solid fa-faucet-drip"></i>
+          </div>
+          <h3>5 Liter Home Eco-Jug</h3>
+          <p>Ideal for families and offices looking for pure mineral water with minimal plastic usage.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-            // Listen for scroll
-            window.addEventListener('scroll', revealOnScroll);
-            
-            // Trigger once immediately to check elements already in view on load
-            revealOnScroll();
-        });
-    </script>
+  <!-- SUSTAINABILITY SECTION -->
+  <section class="sustainability" id="sustainability">
+    <div class="container">
+      <h2 class="section-title">Green Bottle Initiative</h2>
+      <p class="section-subtitle">Our commitment to preserving nature goes hand-in-hand with delivering pure hydration.</p>
+     
+      <div class="sustainability-stats">
+        <div class="stat-card">
+          <h3>100%</h3>
+          <p>Recyclable Packaging</p>
+        </div>
+        <div class="stat-card">
+          <h3>0%</h3>
+          <p>Chemical Additives</p>
+        </div>
+        <div class="stat-card">
+          <h3>50K+</h3>
+          <p>Trees Planted Annually</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-subtitle">Interested in bulk orders, partnership, or have questions? Reach out to us anytime.</p>
+     
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3>Connect with Sprinkle Life</h3>
+          <div class="contact-detail">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Headquarters</strong>
+              <p>123 Green Springs Way, Eco Park, CA</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <i class="fa-solid fa-envelope"></i>
+            <div>
+              <strong>Email Us</strong>
+              <p>contact@sprinklelife.com</p>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Call Us</strong>
+              <p>+1 (800) 555-LIFE</p>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent.');">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your Email Address" required>
+          </div>
+          <div class="form-group">
+            <textarea rows="5" placeholder="How can we help you?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-wrapper">
+        <div class="footer-logo">
+          <i class="fa-solid fa-leaf"></i> Sprinkle Life
+        </div>
+        <p>Pure Natural Mineral Water</p>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Sprinkle Life Mineral Water Co. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
 </body>
-</html>
